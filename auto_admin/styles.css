@@ -1,0 +1,27 @@
+body {
+    width: 400px;  /* 设置宽度 */
+    height: 360px; /* 设置高度 */
+    font-family: Arial, sans-serif; /* 字体设置 */
+  }
+  h4 {
+    text-align: center; /* 居中 */
+  }
+  .input-container {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: space-between; /* 元素间距均匀 */
+    align-items: center; /* 垂直居中对齐 */
+    margin-top: 5px; /* 顶部外边距 */
+  }
+  .matchUrl {
+    width: 100px;
+    margin-left: 8px;
+  }
+  .usrpwd {
+    width: 80px;
+  }
+  .setProxy {
+    width: 40px;
+  }
+  button:hover {
+    background-color: rgb(115, 167, 226);
+  }

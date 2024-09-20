@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Proxy Settings</title>
+  <style>
+    body {
+      width: 260px;  /* 设置宽度 */
+      height: 80px; /* 设置高度 */
+      font-family: Arial, sans-serif; /* 字体设置 */
+    }
+    h4 {
+      text-align: center; /* 居中 */
+    }
+    .input-container {
+      display: flex; /* 使用 Flexbox 布局 */
+      justify-content: space-between; /* 元素间距均匀 */
+      align-items: center; /* 垂直居中对齐 */
+      margin-top: 5px; /* 顶部外边距 */
+    }
+    .proxyHost {
+      width: 100px;
+    }
+    .proxyPort {
+      width: 40px;
+    }
+    .setProxy {
+      width: 40px;
+    }
+    .clearProxy {
+      width: 40px;
+    }
+    button:hover {
+      background-color: rgb(115, 167, 226);
+    }
+  </style>
+  <link rel="stylesheet" href="/zui/zui.css">
+</head>
+<body>
+  <h4 class="bg-primary-200">Quick Proxy</h4>
+  <div class="input-container">
+    <input class="proxyHost bg-primary-100" id="proxyHost1" placeholder="Host" />
+    <input class="proxyPort bg-primary-100" id="proxyPort1" placeholder="Port" />
+    <button class="setProxy label success" id="setProxy1">Set</button>
+    <button class="clearProxy warning" id="clearProxy1">Clear</button>
+  </div>
+  <script src="popup.js"></script>
+  <script src="/zui/zui.js"></script>
+</body>
+</html>

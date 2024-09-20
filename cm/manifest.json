@@ -1,0 +1,30 @@
+{
+    "manifest_version": 3,
+    "name": "helloworld",
+    "version": "1.0.0",
+    "description": "first extension",
+    "action": {
+        "default_popup": "/popup/popup.html",
+        "default_icon": "/images/sources.png"
+    },
+    "icons": {
+        "16": "/images/warehouse-16.png",
+        "32": "/images/warehouse-32.png",
+        "48": "/images/warehouse-48.png",
+        "128": "/images/warehouse-128.png"
+    },
+    "content_scripts": [
+        {
+            "js": ["/scripts/content.js"],
+            "matches": ["*://www.baidu.com/*"]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "contextMenus"
+    ]
+}

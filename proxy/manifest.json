@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "QuickProxy",
+    "version": "1.0",
+    "description": "Proxy Settings Extension",
+    "icons": {
+      "16": "/images/proxy-16.png",
+      "32": "/images/proxy-32.png",
+      "48": "/images/proxy-48.png",
+      "128": "/images/proxy-128.png"
+    },
+    "permissions": [
+      "proxy",
+      "tabs",
+      "storage"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html"
+    }
+  }
