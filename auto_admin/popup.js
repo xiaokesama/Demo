@@ -5,18 +5,21 @@ function getUrlUsrPwdArrayfromPage() {
   inputboxs.forEach((inputbox, index) => {
     const matchUrl = inputbox.querySelector('#matchUrl');
     const usernameSelector = inputbox.querySelector('#usernameSelector');
+    const username = inputbox.querySelector('#username');
     const passwordSelector = inputbox.querySelector('#passwordSelector');
+    const password = inputbox.querySelector('#password');
     const setting = {
       index: index,
       matchUrl: matchUrl.value,
       usernameSelector: usernameSelector.value,
-      passwordSelector: passwordSelector.value
+      username: username.value,
+      passwordSelector: passwordSelector.value,
+      password: password.value
     }
     UrlUsrPwdArray.push(setting)
   });
   return UrlUsrPwdArray
 }
-
 // 保存当前页面的所有配置到本地
 function saveUrlUsrPwdArraytoStorage(UrlUsrPwdArray) {
   chrome.storage.local.set({
@@ -55,16 +58,33 @@ async function initUrlUsrPwdArray() {
   }
   console.log(UrlUsrPwdArray)
   UrlUsrPwdArray.forEach((setting, index) => {
-    if(inputboxs[index].querySelector('#matchUrl') && setting){
+    if(inputboxs[index] && inputboxs[index].querySelector('#matchUrl') && setting){
       inputboxs[index].querySelector('#matchUrl').value=setting.matchUrl;
       inputboxs[index].querySelector('#usernameSelector').value=setting.usernameSelector;
+      inputboxs[index].querySelector('#username').value=setting.username;
       inputboxs[index].querySelector('#passwordSelector').value=setting.passwordSelector;
+      inputboxs[index].querySelector('#password').value=setting.password;
     }
   });
 }
 
+// 把login.asp放在第1个位置，作为默认配置
+// (async function(){
+//   const UrlUsrPwdArray = await getUrlUsrPwdArrayfromStorage()
+//   UrlUsrPwdArray[0] = {
+//     index: 0,
+//     matchUrl: "http://*/login.asp",
+//     usernameSelector: "#username",
+//     username: "admin",
+//     passwordSelector: "#password",
+//     password: "admin"
+//   }
+//   saveUrlUsrPwdArraytoStorage(UrlUsrPwdArray)
+// }());
+
 // 初始化时加载已保存的配置
 initUrlUsrPwdArray();
+
 
 // 按钮绑定事件，存储配置
 (function(){
@@ -75,7 +95,9 @@ initUrlUsrPwdArray();
       const inputs = inputContainers.querySelectorAll('input');
       const matchUrl = inputs[0].value;
       const usernameSelector = inputs[1].value;
-      const passwordSelector = inputs[2].value;
+      const username = inputs[2].value;
+      const passwordSelector = inputs[3].value;
+      const password = inputs[4].value;
 
       // 读取Storage中的配置并更新
       const UrlUsrPwdArray = await getUrlUsrPwdArrayfromStorage()
@@ -83,7 +105,9 @@ initUrlUsrPwdArray();
         index: index,
         matchUrl: matchUrl,
         usernameSelector: usernameSelector,
-        passwordSelector: passwordSelector
+        username: username,
+        passwordSelector: passwordSelector,
+        password: password
       }
       saveUrlUsrPwdArraytoStorage(UrlUsrPwdArray)
       // 刷新页面
@@ -99,7 +123,9 @@ initUrlUsrPwdArray();
         index: index,
         matchUrl: "",
         usernameSelector: "",
-        passwordSelector: ""
+        username: "",
+        passwordSelector: "",
+        password: ""
       }
       saveUrlUsrPwdArraytoStorage(UrlUsrPwdArray)
       // 刷新页面
