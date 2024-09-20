@@ -8,13 +8,17 @@ function getUrlUsrPwdArrayfromPage() {
     const username = inputbox.querySelector('#username');
     const passwordSelector = inputbox.querySelector('#passwordSelector');
     const password = inputbox.querySelector('#password');
+    const submitButtonSelector = inputbox.querySelector('#submitButtonSelector');
+    const toggleSwitch = inputbox.querySelector('#toggleSwitch');
     const setting = {
       index: index,
       matchUrl: matchUrl.value,
       usernameSelector: usernameSelector.value,
       username: username.value,
       passwordSelector: passwordSelector.value,
-      password: password.value
+      password: password.value,
+      submitButtonSelector: submitButtonSelector.value,
+      toggleSwitch: toggleSwitch.checked
     }
     UrlUsrPwdArray.push(setting)
   });
@@ -64,24 +68,32 @@ async function initUrlUsrPwdArray() {
       inputboxs[index].querySelector('#username').value=setting.username;
       inputboxs[index].querySelector('#passwordSelector').value=setting.passwordSelector;
       inputboxs[index].querySelector('#password').value=setting.password;
+      inputboxs[index].querySelector('#submitButtonSelector').value=setting.submitButtonSelector;
+      inputboxs[index].querySelector('#toggleSwitch').checked=setting.toggleSwitch;
     }
   });
 }
 
 // 把login.asp放在第1个位置，作为默认配置
-// (async function(){
-//   const UrlUsrPwdArray = await getUrlUsrPwdArrayfromStorage()
-//   UrlUsrPwdArray[0] = {
-//     index: 0,
-//     matchUrl: "http://*/login.asp",
-//     usernameSelector: "#username",
-//     username: "admin",
-//     passwordSelector: "#password",
-//     password: "admin"
-//   }
-//   saveUrlUsrPwdArraytoStorage(UrlUsrPwdArray)
-// }());
+(async function(){
+  const UrlUsrPwdArray = await getUrlUsrPwdArrayfromStorage()
+  if(UrlUsrPwdArray[15] && UrlUsrPwdArray[15].matchUrl !== ""){
+    return;
+  }
+  UrlUsrPwdArray[15] = {
+    index: 15,
+    matchUrl: "http://*/login.asp",
+    usernameSelector: "#username",
+    username: "admin",
+    passwordSelector: "#password",
+    password: "admin",
+    submitButtonSelector: "#b_login",
+    toggleSwitch: true
+  }
+  saveUrlUsrPwdArraytoStorage(UrlUsrPwdArray)
+}());
 
+// clearUrlUsrPwdArraytoStorage() 
 // 初始化时加载已保存的配置
 initUrlUsrPwdArray();
 
@@ -98,6 +110,8 @@ initUrlUsrPwdArray();
       const username = inputs[2].value;
       const passwordSelector = inputs[3].value;
       const password = inputs[4].value;
+      const submitButtonSelector = inputs[5].value;
+      const toggleSwitch = inputs[6].checked;
 
       // 读取Storage中的配置并更新
       const UrlUsrPwdArray = await getUrlUsrPwdArrayfromStorage()
@@ -107,7 +121,9 @@ initUrlUsrPwdArray();
         usernameSelector: usernameSelector,
         username: username,
         passwordSelector: passwordSelector,
-        password: password
+        password: password,
+        submitButtonSelector: submitButtonSelector,
+        toggleSwitch: toggleSwitch
       }
       saveUrlUsrPwdArraytoStorage(UrlUsrPwdArray)
       // 刷新页面
@@ -125,7 +141,9 @@ initUrlUsrPwdArray();
         usernameSelector: "",
         username: "",
         passwordSelector: "",
-        password: ""
+        password: "",
+        submitButtonSelector: "",
+        toggleSwitch: false
       }
       saveUrlUsrPwdArraytoStorage(UrlUsrPwdArray)
       // 刷新页面

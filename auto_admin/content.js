@@ -25,12 +25,14 @@ function isUrlMatching(pattern, url) {
             const checkElement = setInterval(() => {
                 usernameElement = document.querySelector(UrlUsrPwd.usernameSelector);
                 passwordElement = document.querySelector(UrlUsrPwd.passwordSelector);
-                // const submitButton = document.querySelector("#b_login");
+                submitButtonElement = document.querySelector(UrlUsrPwd.submitButtonSelector);
                 if (usernameElement && passwordElement) {
                     usernameElement.value = UrlUsrPwd.username;
                     passwordElement.value = UrlUsrPwd.password;
                     clearInterval(checkElement);
-                    // submitButton.click();
+                }
+                if (submitButtonElement && UrlUsrPwd.toggleSwitch) {
+                    submitButtonElement.click()
                 }
             }, 100);
             return;
