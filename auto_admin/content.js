@@ -22,16 +22,28 @@ function isUrlMatching(pattern, url) {
     console.log(UrlUsrPwdArray)
     UrlUsrPwdArray.forEach(UrlUsrPwd => {
         if(UrlUsrPwd && UrlUsrPwd.matchUrl && isUrlMatching(UrlUsrPwd.matchUrl, window.location.href)){
+            console.log('匹配到URL：' + window.location.href)
             const checkElement = setInterval(() => {
                 usernameElement = document.querySelector(UrlUsrPwd.usernameSelector);
                 passwordElement = document.querySelector(UrlUsrPwd.passwordSelector);
                 submitButtonElement = document.querySelector(UrlUsrPwd.submitButtonSelector);
                 if (usernameElement && passwordElement) {
+                    console.log('自动填入用户名密码')
                     usernameElement.value = UrlUsrPwd.username;
+                    usernameElement.innerText = UrlUsrPwd.username;
                     passwordElement.value = UrlUsrPwd.password;
+                    passwordElement.innerText = UrlUsrPwd.password;
+                    // 触发input事件，避免提示：请填写用户名和密码
+                    const event = new Event('input', { bubbles: true });
+                    usernameElement.dispatchEvent(event);
+                    passwordElement.dispatchEvent(event);
                     clearInterval(checkElement);
                 }
                 if (submitButtonElement && UrlUsrPwd.toggleSwitch) {
+                    setTimeout(() => {
+                        console.log("等待 0.1 秒");
+                    }, 100);
+                    console.log('点击提交按钮')
                     submitButtonElement.click()
                 }
             }, 100);
